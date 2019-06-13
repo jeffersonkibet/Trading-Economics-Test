@@ -243,6 +243,8 @@ for($i=0; $i<count($obj['students']); $i++) {
 	
 	echo '<div class="col-md-4" style="margin-left:20%;">';
 	echo '<h2> China to US Exports </h2>';
+/*  GRAPHING STARTS*/	
+	
   /*Graph One:Dygraphs*/
 echo  '<div id="graphdivv">
 <script type="text/javascript">
@@ -265,6 +267,9 @@ g=new Dygraph(document.getElementById("graphdivv"),';
 </div>';
   echo "</div>";
   echo '</section>';
+  
+  /*MULTIPLE LINE GRAPHS STARTS HERE*/
+  
  echo'<section  class="raw">
 <div class="col-md-2">
 
@@ -310,6 +315,8 @@ Plotly.newPlot('myDiv', data,layout); </script>
 ";
 
 echo '</section>';
+
+/* Time Series Bar Chart STARTS HERE*/
 
 echo '<section class="raw">';
 
