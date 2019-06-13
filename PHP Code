@@ -20,13 +20,11 @@ Trading Economics: CHINA EXPORTS TO USA and USA EXPORTS TOC CHINA.
 <div class="col-md-2">
 
 </div>
-
-
 <?php
 
 /* Geting Data for USA Exports to CHINA */
 
-
+//Initializing Curl
 	$curl = curl_init();
 
 curl_setopt_array($curl, array(
@@ -77,14 +75,9 @@ if ($err) {
 
 $seriesvalues1= json_encode($temp_array);
 $seriesyear1 = json_encode($year);
-/*echo "<hr>";
-echo json_encode($temp_array);
-echo "<hr>";
-echo json_encode($year);
 
-echo "<hr>";
+//interating through array.
 
-*/
 for($i=0; $i<count($obj['students']); $i++) {
     
 	
@@ -107,6 +100,7 @@ for($i=0; $i<count($obj['students']); $i++) {
   
   echo '<div class="col-md-4">';
 echo '<h2> US to China Exports </h2>';
+//Plotting First single Series graph
   /*Graph One:Dygraphs*/
 echo  '<div id="graphdivvv">
 <script type="text/javascript">
@@ -122,7 +116,7 @@ g=new Dygraph(document.getElementById("graphdivvv"),';
 				
   
   
-                labels: [ "x", "A" ]
+                labels: [ "x", "USA EXPORTS TO CHINA" ]
               });
   
 </script>
@@ -143,7 +137,8 @@ g=new Dygraph(document.getElementById("graphdivvv"),';
 
 
 
-
+//Get Data from API via Curl
+//Initializing Curl
 	
 	$curl = curl_init();
 
@@ -184,6 +179,8 @@ if ($err) {
  $newencoded = json_encode(array("students"=>$decodedjson));
   $obj = json_decode($newencoded,true);
   
+  // Extracting data from array and Processing Data
+  
   for($i=0; $i<count($obj['students']); $i++) {
     
 	
@@ -218,12 +215,7 @@ for($i=0; $i<count($obj['students']); $i++) {
 
 	
   }
- /*  echo "<hr>";
-  
-
-  echo json_encode($pointarray);
-  
-  echo "<hr>";*/
+ 
   
   
 	
@@ -231,20 +223,12 @@ for($i=0; $i<count($obj['students']); $i++) {
 }
 	
 	
-	
 
-
-
-
-
-
-
-
-	
 	echo '<div class="col-md-4" style="margin-left:20%;">';
 	echo '<h2> China to US Exports </h2>';
-/*  GRAPHING STARTS*/	
 	
+	//Plottin Second single Series Graph
+	//China Exports to US
   /*Graph One:Dygraphs*/
 echo  '<div id="graphdivv">
 <script type="text/javascript">
@@ -260,7 +244,7 @@ g=new Dygraph(document.getElementById("graphdivv"),';
 				
   
   
-                labels: [ "x", "A" ]
+                labels: [ "x", "China Exports to US" ]
               });
   
 </script>
@@ -268,7 +252,9 @@ g=new Dygraph(document.getElementById("graphdivv"),';
   echo "</div>";
   echo '</section>';
   
-  /*MULTIPLE LINE GRAPHS STARTS HERE*/
+  //Ploting Multiple Series Graphs
+  
+  //Multiple Series Graph STARTS HERE
   
  echo'<section  class="raw">
 <div class="col-md-2">
@@ -315,8 +301,7 @@ Plotly.newPlot('myDiv', data,layout); </script>
 ";
 
 echo '</section>';
-
-/* Time Series Bar Chart STARTS HERE*/
+//Multiple Series Barchart Starts Here
 
 echo '<section class="raw">';
 
@@ -393,6 +378,8 @@ Plotly.newPlot('myDivision', datta, layout); </script>
   
 
 ?>
+
+
 </section>
 
  
