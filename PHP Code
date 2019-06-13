@@ -1,0 +1,393 @@
+<html>
+<head>
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<title>
+Trading Economics: CHINA EXPORTS TO USA and USA EXPORTS TOC CHINA.
+</title>
+
+<script src="http://dygraphs.com/2.1.0/dygraph.min.js"></script>
+<script src="http://dygraphs.com/2.1.0/dygraph.js"></script>
+<link rel="stylesheet" href="http://dygraphs.com/2.1.0/dygraph.css" />
+
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  </head>
+
+<body>
+
+<section id="intro" class="raw" style="margin-top:10%;">
+
+ <h1 style="text-align:center;"> CHINA USA TRADING TIME SERIES  </h1> 
+<div class="col-md-2">
+
+</div>
+
+
+<?php
+
+/* Geting Data for USA Exports to CHINA */
+
+
+	$curl = curl_init();
+
+curl_setopt_array($curl, array(
+  CURLOPT_URL => "http://api.tradingeconomics.com/comtrade/historical/USACHN00002?c=guest%3Aguest&f=json",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "GET",
+  CURLOPT_HTTPHEADER => array(
+    "cache-control: no-cache",
+    "postman-token: 6faf6144-cfbf-0f24-05c5-efbd5b32b806"
+  ),
+));
+
+$response = curl_exec($curl);
+$err = curl_error($curl);
+
+curl_close($curl);
+
+if ($err) {
+  echo "cURL Error #:" . $err;
+} else {
+	$temp_array =array();
+    $year = array();
+    $pointarray = array();
+	$pointarray1 = array();
+    $myarray = array();
+  
+	$decodedjson = json_decode($response,true);
+  $temp_array =array();
+  
+  
+  
+  
+ $newencoded = json_encode(array("students"=>$decodedjson));
+  $obj = json_decode($newencoded,true);
+  
+  for($i=0; $i<count($obj['students']); $i++) {
+    
+	
+	$temp_array[] =$obj['students'][$i]["value"];
+	 $yearstring = substr($obj['students'][$i]["date"],0,4);
+    $year[] =(int)$yearstring;	
+	
+}
+
+$seriesvalues1= json_encode($temp_array);
+$seriesyear1 = json_encode($year);
+/*echo "<hr>";
+echo json_encode($temp_array);
+echo "<hr>";
+echo json_encode($year);
+
+echo "<hr>";
+
+*/
+for($i=0; $i<count($obj['students']); $i++) {
+    
+	
+	     
+	 $yearstring = substr($obj['students'][$i]["date"],0,4);
+           $yearint =(int)$yearstring;
+	 
+	$point = array($yearint,$obj['students'][$i]["value"]);
+			 
+			 $pointarray1[] = $point;
+			 
+			
+
+	
+  }
+   echo "<hr>";
+  
+
+  /*echo json_encode($pointarray);*/
+  
+  echo '<div class="col-md-4">';
+echo '<h2> US to China Exports </h2>';
+  /*Graph One:Dygraphs*/
+echo  '<div id="graphdivvv">
+<script type="text/javascript">
+
+g=new Dygraph(document.getElementById("graphdivvv"),';
+           echo json_encode($pointarray1)
+	  
+	  
+	  
+               .
+              ',
+              {
+				
+  
+  
+                labels: [ "x", "A" ]
+              });
+  
+</script>
+</div>';
+  echo "</div>";
+  
+  
+	
+	
+	
+	
+}
+	
+	
+	
+
+
+
+
+
+
+	
+	$curl = curl_init();
+
+curl_setopt_array($curl, array(
+  CURLOPT_URL => "http://api.tradingeconomics.com/comtrade/historical/CHNUSA00002?c=guest%3Aguest&f=json",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "GET",
+  CURLOPT_HTTPHEADER => array(
+    "cache-control: no-cache",
+    "postman-token: 6faf6144-cfbf-0f24-05c5-efbd5b32b806"
+  ),
+));
+
+$response = curl_exec($curl);
+$err = curl_error($curl);
+
+curl_close($curl);
+
+if ($err) {
+  echo "cURL Error #:" . $err;
+} else {
+	
+	$temp_array =array();
+    $year = array();
+    $pointarray = array();
+    $myarray = array();
+  
+	$decodedjson = json_decode($response,true);
+  $temp_array =array();
+  
+  
+  
+  
+ $newencoded = json_encode(array("students"=>$decodedjson));
+  $obj = json_decode($newencoded,true);
+  
+  for($i=0; $i<count($obj['students']); $i++) {
+    
+	
+	$temp_array[] =$obj['students'][$i]["value"];
+	 $yearstring = substr($obj['students'][$i]["date"],0,4);
+    $year[] =(int)$yearstring;	
+	
+}
+
+   $seriesvalues2= json_encode($temp_array);
+   $seriesyear2 = json_encode($year);
+
+/*echo json_encode($temp_array);
+echo json_encode($year);*/
+
+
+for($i=0; $i<count($obj['students']); $i++) {
+    
+	
+	     
+	 $yearstring = substr($obj['students'][$i]["date"],0,4);
+           $yearint =(int)$yearstring;
+	 
+	$point = array($yearint,$obj['students'][$i]["value"]);
+			 
+			 $pointarray[] = $point;
+			 
+			 
+			 
+			 
+			
+
+	
+  }
+ /*  echo "<hr>";
+  
+
+  echo json_encode($pointarray);
+  
+  echo "<hr>";*/
+  
+  
+	
+	
+}
+	
+	
+	
+
+
+
+
+
+
+
+
+	
+	echo '<div class="col-md-4" style="margin-left:20%;">';
+	echo '<h2> China to US Exports </h2>';
+  /*Graph One:Dygraphs*/
+echo  '<div id="graphdivv">
+<script type="text/javascript">
+
+g=new Dygraph(document.getElementById("graphdivv"),';
+           echo json_encode($pointarray)
+	  
+	  
+	  
+               .
+              ',
+              {
+				
+  
+  
+                labels: [ "x", "A" ]
+              });
+  
+</script>
+</div>';
+  echo "</div>";
+  echo '</section>';
+ echo'<section  class="raw">
+<div class="col-md-2">
+
+</div>' ;
+   
+  /*
+  
+  echo json_encode($pointarray);
+ 
+ echo "<hr>";*/
+ echo '<div class="col-md-8">';
+ echo '<div id="myDiv" >';
+ echo "<script>
+ 
+ var trace1 = {
+  type: 'scatter',
+  mode: 'lines',
+  name: 'CHINA TO USA',
+  x:".$seriesyear2.",
+  y:".$seriesvalues2.",
+  line: {color: '#FF0000'}
+}
+
+var trace2 = {
+  type: 'scatter',
+  mode: 'lines',
+  name: 'USA TO CHINA',
+  x:".$seriesyear1.",
+  y:".$seriesvalues1.",
+  line: {color: '#013cFE'}
+}
+
+var data = [trace1,trace2];
+ var layout = {
+  title: 'Comparison Between Exports between China and USA',
+};
+
+ 
+
+Plotly.newPlot('myDiv', data,layout); </script>
+</div>
+</div>
+";
+
+echo '</section>';
+
+echo '<section class="raw">';
+
+echo '<div class="col-md-2">
+
+</div>';
+echo '<div class="col-md-8">';
+ echo '<div id="myDivision" >';
+ echo "<script>
+ 
+ 
+
+
+var traces1 = {
+  x:".$seriesyear2.",
+  y:".$seriesvalues2.",
+  name: 'China to US',
+  marker: {color: 'rgb(55, 83, 109)'},
+  type: 'bar'
+};
+
+var traces2 = {
+  x:".$seriesyear1.",
+  y:".$seriesvalues1.",
+  name: 'US to China',
+  marker: {color: 'rgb(26, 118, 255)'},
+  type: 'bar'
+};
+
+var datta = [traces1, traces2];
+
+var layout = {
+  title: 'US CHINA TRADE',
+  xaxis: {tickfont: {
+      size: 14,
+      color: 'rgb(107, 107, 107)'
+    }},
+  yaxis: {
+    title: 'USD (millions)',
+    titlefont: {
+      size: 16,
+      color: 'rgb(107, 107, 107)'
+    },
+    tickfont: {
+      size: 14,
+      color: 'rgb(107, 107, 107)'
+    }
+  },
+  legend: {
+    x: 0,
+    y: 1.0,
+    bgcolor: 'rgba(255, 255, 255, 0)',
+    bordercolor: 'rgba(255, 255, 255, 0)'
+  },
+  barmode: 'group',
+  bargap: 0.15,
+  bargroupgap: 0.1
+};
+
+Plotly.newPlot('myDivision', datta, layout); </script>
+</div>
+</div>
+";
+
+
+
+
+
+
+
+
+
+ 
+  
+
+?>
+</section>
+
+ 
+</body>
+</html>
